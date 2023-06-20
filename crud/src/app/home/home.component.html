@@ -1,18 +1,101 @@
 <div>
-  <h1>Lista de usuarios</h1>
-  <button type="button" (click)="obtenerUsuarios()">Buscar</button>
+  <h1>Agregar cliente</h1>
+  Nombre<input type="text" [(ngModel)]="nombreCliente"><br><br>
+  Apellido<input type="text" [(ngModel)]="apellidoCliente"><br><br>
+  Empresa
+  <select name="empresas" id="empresas" [(ngModel)]="empresaCliente">
+    <option *ngFor="let item of empresas" 
+      [value]="item.nombre">
+      {{ item.nombre }}
+    </option>
+  </select>
+  <br><br>
+  <button (click)="agregarCliente()">Agregar cliente</button>
+  <br>
+  <br>
+  <br>
+  <h1>Lista de clientes</h1>
   <table>
     <thead>
       <tr>
         <th>#ID</th>
         <th>Name</th>
+        <th>Empresa</th>
+        <th>Configurar</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of data">
-        <th>{{ item.id }}</th>
+      <tr *ngFor="let item of clientes">
+        <th>{{ item.clienteId }}</th>
         <td>{{ item.nombre }} {{ item.apellido }}</td>
+        <td>{{ item.nombreEmpresa }}</td>
+        <td><a href="#openModal"><button (click)="clienteAEditar(item.nombre, item.apellido, item.clienteId, item.empresa)">Editar</button></a>
+        <button (click)="eliminarCliente(item.clienteId)">Eliminar</button></td>
       </tr>
     </tbody>
   </table>
+</div>
+<br>
+<br>
+<br>
+<br>
+<div>
+  <h1>Agregar Empresa</h1>
+  Nombre<input type="text" [(ngModel)]="nombreEmpresa"><br><br>
+  Direccion<input type="text" [(ngModel)]="direccionEmpresa"><br><br>
+  <br><br>
+  <button (click)="agregarEmpresa()">Agregar Empresa</button>
+  <br>
+  <br>
+  <br>
+  <h1>Lista de Empresas</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>#ID</th>
+        <th>Nombre</th>
+        <th>Direccion</th>
+        <th>Configurar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of empresas">
+        <th>{{ item.idEmpresa }}</th>
+        <td>{{ item.nombre }}</td>
+        <td>{{ item.direccion }}</td>
+        <td><a href="#openModalEmpresa"><button (click)="empresaAEditar(item.nombre, item.direccion, item.idEmpresa)">Editar</button></a>
+        <button (click)="eliminarEmpresa(item.idEmpresa)">Eliminar</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div id="openModal" class="modalDialog">
+	<div>
+		<a href="#close" title="Close" class="close">X</a>
+		<h2>Editar cliente</h2>
+    Nombre<input type="text" [(ngModel)]="nombreCliente">
+    <br><br>
+    Apellido<input type="text" [(ngModel)]="apellidoCliente">
+    <br><br>
+    Empresa<select name="empresas" id="empresas" [(ngModel)]="empresaCliente">
+      <option *ngFor="let item of empresas" 
+        [value]="item.nombre">
+        {{ item.nombre }}
+      </option>
+    </select>
+    <br><br>
+    <a href="#close"><button (click)="editarCliente()">Editar cliente</button></a>
+	</div>
+</div>
+<div id="openModalEmpresa" class="modalDialog">
+	<div>
+		<a href="#closeEmpresa" title="Close" class="close">X</a>
+		<h2>Editar cliente</h2>
+    Nombre<input type="text" [(ngModel)]="nombreEmpresa">
+    <br><br>
+    Direccion<input type="text" [(ngModel)]="direccionEmpresa">
+    <br><br>
+    <br><br>
+    <a href="#closeEmpresa"><button (click)="editarEmpresa()">Editar empresa</button></a>
+	</div>
 </div>
