@@ -1,0 +1,50 @@
+CREATE DATABASE berenice
+USE berenice
+
+
+USE [berenice]
+GO
+
+/****** Object:  Table [dbo].[Empresa]    Script Date: 20/06/2023 1:45:15 p. m. ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Empresa](
+	[id_empresa] [int] IDENTITY(1,1) NOT NULL,
+	[nombre] [varchar](100) NULL,
+	[direccion] [varchar](100) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_empresa] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+USE [berenice]
+GO
+
+/****** Object:  Table [dbo].[Cliente]    Script Date: 20/06/2023 1:45:46 p. m. ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Cliente](
+	[cliente_id] [int] IDENTITY(1,1) NOT NULL,
+	[empresa] [int] NOT NULL,
+	[nombre] [varchar](100) NULL,
+	[apellido] [varchar](100) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[cliente_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[Cliente]  WITH CHECK ADD FOREIGN KEY([empresa])
+REFERENCES [dbo].[Empresa] ([id_empresa])
+GO
